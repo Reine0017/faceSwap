@@ -362,11 +362,13 @@ center_face2 = (int((x + x + w) / 2), int((y + y + h) / 2))
 
 seamlessclone = cv2.seamlessClone(result, img2, img2_head_mask, center_face2, cv2.NORMAL_CLONE)
 
+#replace this with app root path or smth
 cv2.imwrite("/Users/fangran/Documents/faceSwap/cloned.jpg", seamlessclone)
 
 cv2.imshow("seamlessclone", seamlessclone)
 cv2.waitKey(0)
 
+#seamless cloning following the tutorial doesnt work - white lines still there
 
 
 cv2.destroyAllWindows()

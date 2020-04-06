@@ -33,6 +33,26 @@ for face in faces:
 
 	face_image_1 = cv2.bitwise_and(img, img, mask=mask)
 
+	#delaunay triangulation
+	rect = cv2.boundingRect(convexhull)
+	subdiv = cv2.Subdiv2D(rect)
+	subdiv.insert(landmarks_points)
+	triangles = subdiv.getTriangleList()
+	triangles = np.array(triangles, dtype = np.int32)
+
+	for t in triangles:
+		print("Triangles", t)
+		pt1 = (t[0], t[1])
+		pt2 = (t[2], t[3])
+		pt3 = (t[4], t[5])
+
+		cv2.line(img, pt1, pt2, (0,0,255), 2)
+		cv2.line(img, pt2, pt3, (0,0,255), 2)
+		cv2.line(img, pt1, pt3, (0,0,255), 2)
+
+	#(x,y,w,h) = rect
+	#cv2.rectangle(img, (x, y), (x+w, y+h), (0,255,0))
+
 cv2.imshow("Image1", img)
 cv2.imshow("mask", mask)
 cv2.imshow("face_image_1", face_image_1)
